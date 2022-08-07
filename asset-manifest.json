@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/strandridaren/static/css/main.c5cb4a9f.css",
-    "main.js": "/strandridaren/static/js/main.f47f4a62.js",
+    "main.css": "/strandridaren/static/css/main.5825faf9.css",
+    "main.js": "/strandridaren/static/js/main.b8edbdf5.js",
     "static/js/787.f6d882a9.chunk.js": "/strandridaren/static/js/787.f6d882a9.chunk.js",
     "static/media/skummes.jpeg": "/strandridaren/static/media/skummes.c468e6202666745b66d9.jpeg",
     "index.html": "/strandridaren/index.html",
-    "main.c5cb4a9f.css.map": "/strandridaren/static/css/main.c5cb4a9f.css.map",
-    "main.f47f4a62.js.map": "/strandridaren/static/js/main.f47f4a62.js.map",
+    "main.5825faf9.css.map": "/strandridaren/static/css/main.5825faf9.css.map",
+    "main.b8edbdf5.js.map": "/strandridaren/static/js/main.b8edbdf5.js.map",
     "787.f6d882a9.chunk.js.map": "/strandridaren/static/js/787.f6d882a9.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.c5cb4a9f.css",
-    "static/js/main.f47f4a62.js"
+    "static/css/main.5825faf9.css",
+    "static/js/main.b8edbdf5.js"
   ]
 }
