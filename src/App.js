@@ -87,6 +87,7 @@ function App() {
         <div className="App" style={{ backgroundImage: `url(${image})` }}>
             <div style={{ fontSize: '42px' }}>
                 Välkommen till Strandridarens släputhyrning!
+                <p>Swish & Kontakt: 070 - 231 3101</p>
 
             </div>
             <Calendar minDate={now.toDate()} maxDate={now.add(3, 'month').toDate()} onClickDay={(value, event) => onClickDay(value, event)} showDoubleView
@@ -110,7 +111,7 @@ function App() {
                             Pris: {price}
                         </span>
                     </div>
-                    {todaysBookings.map(data => <>{dayjs(data.start).format('HH:MM')} - {dayjs(data.end).format('HH:MM')}</>)}
+                    {todaysBookings.map((data, index) => <React.Fragment key={index}>{dayjs(data.start).format('HH:MM')} - {dayjs(data.end).format('HH:MM')}</React.Fragment >)}
                 </div>}
                 <button className='Button' style={{ marginTop: '32px' }} onClick={() => setIsOpen(true)}>Välj tid</button>
             </div>

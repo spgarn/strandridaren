@@ -1,10 +1,15 @@
 import { useForm, ValidationError } from '@formspree/react';
 import React from 'react'
+import toast from 'react-hot-toast';
 
 function ContactForm({start,end,hours,price}) {
     const [state, handleSubmit] = useForm("xgedglnw");
     if (state.succeeded) {
-        return <p>Bokat!</p>;
+        toast.success('Din tid är nu bokad.')
+        return <>
+        <p>Nu är det bokat.</p> 
+        <p>Swisha kalle {price} kr, på nummer 070 - 231 3101</p>
+        </>
     }
     return (
         <form className='Form' onSubmit={handleSubmit}>
@@ -17,6 +22,7 @@ function ContactForm({start,end,hours,price}) {
           id="firstName"
           type={'text'}
           name="Förnamn"
+          required
           />
         <ValidationError 
           prefix="Förnamn" 
@@ -30,6 +36,7 @@ function ContactForm({start,end,hours,price}) {
           Efternamn
         </label>
                  <input
+          required
           id="lastName"
           type={'text'}
           name="Efternamn"
@@ -49,6 +56,7 @@ function ContactForm({start,end,hours,price}) {
           id="email"
           type="email" 
           name="Email"
+          required
           />
         <ValidationError 
           prefix="Email" 
@@ -65,6 +73,7 @@ function ContactForm({start,end,hours,price}) {
           id="phone"
           type="phone" 
           name="Telefonnummer"
+          required
           />
         <ValidationError 
           prefix="Phone" 
