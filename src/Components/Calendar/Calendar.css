@@ -20,10 +20,8 @@
     min-width: 1200px;
    }
 
-.blocked-tile {
-pointer-events: none;
-background-color:gray !important;
-border-radius: 100%;
+.blocked-tile abbr {
+border-bottom:coral 3px solid !important;
 }
 
    .react-calendar__navigation button {
