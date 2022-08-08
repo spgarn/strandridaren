@@ -20,7 +20,13 @@
     min-width: 1200px;
    }
 
-.blocked-tile abbr {
+.blocked-tile1 abbr {
+border-bottom:green 3px solid !important;
+}
+.blocked-tile2 abbr {
+border-bottom:goldenrod 3px solid !important;
+}
+.blocked-tile3 abbr {
 border-bottom:coral 3px solid !important;
 }
 

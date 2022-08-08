@@ -43,7 +43,7 @@ function App() {
         setTotalTime(4)
     }, [currentDate])
 
-    const testData = [{ start: dayjs().format(), end: dayjs().add(4, 'hours').format() }, { start: dayjs().add(5, 'day').format(), end: dayjs().add(5, 'day').add(24, 'hours').format() }]
+    const testData = [{ start: dayjs().add(2, 'day').format(), end: dayjs().add(2, 'day').add(4, 'hours').format() }, { start: dayjs().format(), end: dayjs().add(4, 'hours').format() }, { start: dayjs().add(5, 'hours').format(), end: dayjs().add(9, 'hours').format() }, { start: dayjs().add(5, 'day').format(), end: dayjs().add(5, 'day').add(4, 'hours').format() }, { start: dayjs().add(5, 'day').add(5, 'hours').format(), end: dayjs().add(5, 'day').add(9, 'hours').format() }, { start: dayjs().add(5, 'day').add(10, 'hours').format(), end: dayjs().add(5, 'day').add(14, 'hours').format() }]
 
     const onClickDay = (event, value) => {
         setCurrentDate(event)
@@ -93,7 +93,9 @@ function App() {
             <Calendar minDate={now.toDate()} maxDate={now.add(3, 'month').toDate()} onClickDay={(value, event) => onClickDay(value, event)} showDoubleView
                 tileClassName={({ date }) => {
                     const matchedDates = testData.filter(data => dayjs(data.start).format('YYYY/MM/DD') === dayjs(date).format('YYYY/MM/DD') || dayjs(data.end).format('YYYY/MM/DD') === dayjs(date).format('YYYY/MM/DD'))
-                    if (dayjs(date).format('YYYY/MM/DD') === dayjs(matchedDates[0]?.start).format('YYYY/MM/DD') || dayjs(date).format('YYYY/MM/DD') === dayjs(matchedDates[0]?.end).format('YYYY/MM/DD')) return 'blocked-tile'
+                    if (matchedDates.length === 1) return 'blocked-tile1'
+                    if (matchedDates.length === 2) return 'blocked-tile2'
+                    if (matchedDates.length >= 3) return 'blocked-tile3'
                 }}
             ></Calendar>
             <div ref={ref}>
@@ -111,7 +113,7 @@ function App() {
                             Pris: {price}
                         </span>
                     </div>
-                    {todaysBookings.map((data, index) => <React.Fragment key={index}>{dayjs(data.start).format('HH:MM')} - {dayjs(data.end).format('HH:MM')}</React.Fragment >)}
+                    {todaysBookings.map((data, index) => <div style={{ display: 'flex', flexDirection: 'row', border: '1px solid gray', padding: '4px', borderRadius: '8px' }} key={index}>{dayjs(data.start).format('HH:MM')} - {dayjs(data.end).format('HH:MM')}</div >)}
                 </div>}
                 <button className='Button' style={{ marginTop: '32px' }} onClick={() => setIsOpen(true)}>Välj tid</button>
             </div>
