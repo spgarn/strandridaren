@@ -34,6 +34,7 @@ function App() {
     const [price, setPrice] = useState(0)
     const [totalTime, setTotalTime] = useState(0)
     const [dateChange, setDateChange] = useState(false)
+    const [isBlocked, setIsBlocked] = useState(false)
     const [todaysBookings, setTodaysBookings] = useState([])
 
 
@@ -70,6 +71,12 @@ function App() {
         onBook()
     }, [dateChange])
 
+    useEffect(() => {
+        const booked = todaysBookings.find(booking => start.isBetween(dayjs(booking.start), dayjs(booking.end), 'minute') || end.isBetween(dayjs(booking.start), dayjs(booking.end), 'minute'))
+        if (booked) return setIsBlocked(true)
+        setIsBlocked(false)
+    }, [dateChange])
+
 
 
     const setTime = (fn, value) => {
@@ -104,7 +111,7 @@ function App() {
 
                     <div ><span>Hämta:</span><input min={dayjs().format('YYYY-MM-DDThh:mm')} defaultValue={start.format('YYYY-MM-DDTHH:MM')} onChange={(event) => setTime(setStart, event.target.value)} type='datetime-local'></input></div>
                     <div ><span>Lämna:</span> <input min={dayjs().add(4, 'hours').format('YYYY-MM-DDThh:mm')} max={activeDate.add(3, 'month').toDate()} defaultValue={end.format('YYYY-MM-DDTHH:MM')} onChange={(event) => setTime(setEnd, event.target.value)} type='datetime-local'></input></div>
-                    <Form start={start} end={end} price={price} hours={totalTime} />
+                    <Form isBlocked={isBlocked} start={start} end={end} price={price} hours={totalTime} />
                     <div style={{ display: 'flex', width: '50%', justifyContent: 'space-between' }}>
                         <span>
                             Total tid: {totalTime}

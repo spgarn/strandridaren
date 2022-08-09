@@ -2,7 +2,7 @@ import { useForm, ValidationError } from '@formspree/react';
 import React from 'react'
 import toast from 'react-hot-toast';
 
-function ContactForm({start,end,hours,price}) {
+function ContactForm({start,end,hours,price,isBlocked}) {
     const [state, handleSubmit] = useForm("xgedglnw");
     if (state.succeeded) {
         toast.success('Din tid är nu bokad.')
@@ -86,17 +86,17 @@ function ContactForm({start,end,hours,price}) {
          <input className='hiddenInput'  name="Pris" style={{opacity:0}} id="pris" readOnly value={price}></input>
          <input className='hiddenInput'  name="Timmar" style={{opacity:0}} id="end" readOnly value={hours}></input>
    
-        <button style={{gridArea:'e',width:'75%',justifySelf:'center'}} className='Button' type="submit" disabled={state.submitting}>
+        <button  style={{gridArea:'e',width:'75%',justifySelf:'center'}} className={isBlocked ? 'Disabled' : 'Button'} type="submit" disabled={isBlocked || state.submitting}>
           Skicka
         </button>
       </form>
     );
   }
 
-const Form = ({start,end,hours,price}) => {
+const Form = ({start,end,hours,price,isBlocked}) => {
     
   return (
-    <ContactForm start={start} end={end} hours={hours} price={price}/>
+    <ContactForm isBlocked={isBlocked} start={start} end={end} hours={hours} price={price}/>
   )
 }
 
