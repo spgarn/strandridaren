@@ -7,6 +7,7 @@ import useOutsideClick from './lib/useOutesideClick'
 import dayjs from 'dayjs';
 import Form from './Components/Form';
 import image from './assets/skummes.jpeg'
+import useCheckMediaWidth from './lib/useCheckMediaWidth'
 
 var isBetween = require('dayjs/plugin/isBetween')
 dayjs.extend(isBetween)
@@ -18,6 +19,7 @@ dayjs.extend(isBetween)
 function App() {
     const [isOpen, setIsOpen] = React.useState(false)
     const [currentDate, setCurrentDate] = React.useState()
+    const isMobile = useCheckMediaWidth()
 
 
     const ref = useRef();
@@ -92,12 +94,12 @@ function App() {
 
     return (
         <div className="App" style={{ backgroundImage: `url(${image})` }}>
-            <div style={{ fontSize: '42px' }}>
+            <div style={{ fontSize: '42px', color: 'white', textShadow: '2px 4px 3px rgba(0,0,0,0.3)' }}>
                 Välkommen till Strandridarens släputhyrning!
-                <p>Swish & Kontakt: 070 - 231 3101</p>
+                <p style={{ fontSize: '26px' }}>Swish & Kontakt: 070 - 231 3101</p>
 
             </div>
-            <Calendar minDate={now.toDate()} maxDate={now.add(3, 'month').toDate()} onClickDay={(value, event) => onClickDay(value, event)} showDoubleView
+            <Calendar minDate={now.toDate()} maxDate={now.add(3, 'month').toDate()} onClickDay={(value, event) => onClickDay(value, event)} showDoubleView={!isMobile}
                 tileClassName={({ date }) => {
                     const matchedDates = testData.filter(data => dayjs(data.start).format('YYYY/MM/DD') === dayjs(date).format('YYYY/MM/DD') || dayjs(data.end).format('YYYY/MM/DD') === dayjs(date).format('YYYY/MM/DD'))
                     if (matchedDates.length === 1) return 'blocked-tile1'
