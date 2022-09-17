@@ -6,11 +6,24 @@ function ContactForm({start,end,hours,price,isBlocked}) {
     const [state, handleSubmit] = useForm("xgedglnw");
     if (state.succeeded) {
         toast.success('Din tid är nu bokad.')
+        const data = JSON.stringify({hours,price,start,end})
+        try{
+            fetch('https://m6tpzrokn3.execute-api.eu-north-1.amazonaws.com/prod/bookTrailer',{
+                method:'POST',
+                body:data
+             
+        })
+    } catch (error){
+        console.log(error)
+    }
         return <>
         <p>Nu är det bokat.</p> 
         <p>Swisha kalle {price} kr, på nummer 070 - 231 3101</p>
         </>
+        
     }
+   
+    
     return (
         <form className='Form' onSubmit={handleSubmit}>
             <div>
@@ -90,6 +103,7 @@ function ContactForm({start,end,hours,price,isBlocked}) {
           Skicka
         </button>
       </form>
+   
     );
   }
 
