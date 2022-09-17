@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/strandridaren/static/css/main.6df82825.css",
-    "main.js": "/strandridaren/static/js/main.d0d0f6bc.js",
+    "main.js": "/strandridaren/static/js/main.722ca17d.js",
     "static/js/787.f6d882a9.chunk.js": "/strandridaren/static/js/787.f6d882a9.chunk.js",
     "static/media/skummes.jpeg": "/strandridaren/static/media/skummes.c468e6202666745b66d9.jpeg",
     "index.html": "/strandridaren/index.html",
     "main.6df82825.css.map": "/strandridaren/static/css/main.6df82825.css.map",
-    "main.d0d0f6bc.js.map": "/strandridaren/static/js/main.d0d0f6bc.js.map",
+    "main.722ca17d.js.map": "/strandridaren/static/js/main.722ca17d.js.map",
     "787.f6d882a9.chunk.js.map": "/strandridaren/static/js/787.f6d882a9.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.6df82825.css",
-    "static/js/main.d0d0f6bc.js"
+    "static/js/main.722ca17d.js"
   ]
 }
