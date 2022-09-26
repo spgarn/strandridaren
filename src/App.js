@@ -84,7 +84,9 @@ function App() {
 
     const onClickDay = (event, value) => {
         setCurrentDate(event)
-        const matchedDates = testData.filter(data => dayjs(data.start).format('YYYY/MM/DD') === dayjs(event).format('YYYY/MM/DD') || dayjs(data.end).format('YYYY/MM/DD') === dayjs(event).format('YYYY/MM/DD'))
+        const matchedDates = testData.filter(data => {
+            return dayjs(event).add(1, 'second').isBetween(data.start, data.end, 'second')
+        })
         setTodaysBookings(matchedDates)
     }
 
@@ -118,7 +120,9 @@ function App() {
 
         setIsBlocked(isBetween || overFlow)
 
-    }, [dateChange])
+    }, [dateChange, currentDate, activeDate])
+
+
 
 
 
@@ -143,7 +147,7 @@ function App() {
             </div>
             <Calendar minDate={now.toDate()} maxDate={now.add(3, 'month').toDate()} onClickDay={(value, event) => onClickDay(value, event)} showDoubleView={!isMobile}
                 tileClassName={({ date }) => {
-                    const matchedDates = testData?.filter(data => dayjs(data.start).format('YYYY/MM/DD') === dayjs(date).format('YYYY/MM/DD') || dayjs(data.end).format('YYYY/MM/DD') === dayjs(date).format('YYYY/MM/DD'))
+                    const matchedDates = testData?.filter(data => dayjs(date).add(1, 'second').isBetween(data.start, data.end, 'second'))
                     if (matchedDates?.length === 1) return 'blocked-tile1'
                     if (matchedDates?.length === 2) return 'blocked-tile2'
                     if (matchedDates?.length >= 3) return 'blocked-tile3'
@@ -153,8 +157,8 @@ function App() {
 
                 {isOpen && <div className='Modal'>Vänligen fyll i när du tänkt att hämta släpet.
 
-                    <div ><span>Hämta:</span><input min={dayjs().format('YYYY-MM-DDThh:mm')} value={start.format('YYYY-MM-DDTHH:mm')} onChange={(event) => setTime(setStart, event.target.value)} type='datetime-local'></input></div>
-                    <div ><span>Lämna:</span> <input min={dayjs().add(4, 'hours').format('YYYY-MM-DDThh:mm')} max={activeDate.add(3, 'month').toDate()} value={end.format('YYYY-MM-DDTHH:mm')} onChange={(event) => setTime(setEnd, event.target.value)} type='datetime-local'></input></div>
+                    <div ><span>Hämta:</span><input min={dayjs().format('YYYY-MM-DDTHH:mm')} value={start.format('YYYY-MM-DDTHH:mm')} onChange={(event) => setTime(setStart, event.target.value)} type='datetime-local'></input></div>
+                    <div ><span>Lämna:</span> <input min={dayjs().add(4, 'hours').format('YYYY-MM-DDTHH:mm')} max={activeDate.add(3, 'month').toDate()} value={end.format('YYYY-MM-DDTHH:mm')} onChange={(event) => setTime(setEnd, event.target.value)} type='datetime-local'></input></div>
                     <Form isBlocked={isBlocked} start={start} end={end} price={price} hours={totalTime} />
                     <div style={{ display: 'flex', width: '50%', justifyContent: 'space-between' }}>
                         <span>
@@ -165,7 +169,7 @@ function App() {
                         </span>
                     </div>
                     {todaysBookings.map((data, index) => {
-                        return <div style={{ display: 'flex', flexDirection: 'row', border: '1px solid gray', padding: '4px', borderRadius: '8px' }} key={index}>{dayjs(data.start).format('HH:mm')} - {dayjs(data.end).format('HH:mm')}</div >
+                        return <div style={{ display: 'flex', flexDirection: 'row', border: '1px solid gray', padding: '4px', borderRadius: '8px' }} key={index}>{dayjs(data.start).format('YYYY-MM-DD HH:mm')} - {dayjs(data.end).format('YYYY-MM-DD HH:mm')}</div >
                     })}
                 </div>}
                 <button className='Button' style={{ marginTop: '32px' }} onClick={() => setIsOpen(true)}>Välj tid</button>

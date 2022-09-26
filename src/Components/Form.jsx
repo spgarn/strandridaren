@@ -4,28 +4,34 @@ import toast from 'react-hot-toast';
 
 function ContactForm({start,end,hours,price,isBlocked}) {
     const [state, handleSubmit] = useForm("xgedglnw");
-    if (state.succeeded) {
-        toast.success('Din tid är nu bokad.')
+
+    const handleSend = async (e) => {
+        e.preventDefault()
         const data = JSON.stringify({hours,price,start,end})
-        try{
-            fetch('https://m6tpzrokn3.execute-api.eu-north-1.amazonaws.com/prod/bookTrailer',{
-                method:'POST',
-                body:data
-             
+       const response = await fetch('https://m6tpzrokn3.execute-api.eu-north-1.amazonaws.com/prod/bookTrailer',{
+            method:'POST',
+            body:data
         })
-    } catch (error){
-        console.log(error)
+        const body = await response.json()
+        if(body.status === 200) {
+           return handleSubmit(e)
+        }
+        if(body.status === 403) {
+          return toast.error(body.message)}
+  
     }
+
+    if (state.succeeded) {
+        toast.success(`Du har bokat ett släp i ${hours} timmar till ett pris om ${price} kr`)
         return <>
         <p>Nu är det bokat.</p> 
-        <p>Swisha kalle {price} kr, på nummer 070 - 231 3101</p>
+        <p>Swisha Calle {price} kr, på nummer 070 - 231 3101</p>
         </>
-        
     }
    
     
     return (
-        <form className='Form' onSubmit={handleSubmit}>
+        <form className='Form' onSubmit={handleSend}>
             <div>
 
 <label  style={{margin:'8px 8px 8px 0px'}}  htmlFor="firstName">
@@ -99,7 +105,7 @@ function ContactForm({start,end,hours,price,isBlocked}) {
          <input className='hiddenInput'  name="Pris" style={{opacity:0}} id="pris" readOnly value={price}></input>
          <input className='hiddenInput'  name="Timmar" style={{opacity:0}} id="end" readOnly value={hours}></input>
    
-        <button  style={{gridArea:'e',width:'75%',justifySelf:'center'}} className={isBlocked ? 'Disabled' : 'Button'} type="submit" disabled={isBlocked || state.submitting}>
+        <button style={{gridArea:'e',width:'75%',justifySelf:'center'}} className={isBlocked ? 'Disabled' : 'Button'} type="submit" disabled={isBlocked || state.submitting}>
           Skicka
         </button>
       </form>
