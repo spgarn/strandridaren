@@ -50,8 +50,9 @@
 .Form {
     display:grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-areas: 'a b'
-    'c d'
+    grid-template-areas: 'a a'
+    'b b'
+    'c c'
     'e e';
     gap:2rem
 }

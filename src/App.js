@@ -85,7 +85,7 @@ function App() {
     const onClickDay = (event, value) => {
         setCurrentDate(event)
         const matchedDates = testData.filter(data => {
-            return dayjs(event).add(1, 'second').isBetween(data.start, data.end, 'second')
+            return dayjs(event).add(1, 'second').isBetween(data.start, data.end, 'second') || dayjs(data.start).format('YYYY/MM/DD') === dayjs(event).format('YYYY/MM/DD') || dayjs(data.end).format('YYYY/MM/DD') === dayjs(event).format('YYYY/MM/DD')
         })
         setTodaysBookings(matchedDates)
     }
@@ -142,12 +142,13 @@ function App() {
         <div className="App" style={{ backgroundImage: `url(${image})` }}>
             <div style={{ fontSize: '42px', color: 'white', textShadow: '2px 4px 3px rgba(0,0,0,0.3)' }}>
                 Välkommen till Strandridarens släputhyrning!
-                <p style={{ fontSize: '26px' }}>Swish & Kontakt: 070 - 231 3101</p>
+                <p style={{ fontSize: '26px' }}>Swish: 123 284 81 17</p>
+                <p style={{ fontSize: '26px' }}> Kontakt: 070 - 231 3101</p>
 
             </div>
             <Calendar minDate={now.toDate()} maxDate={now.add(3, 'month').toDate()} onClickDay={(value, event) => onClickDay(value, event)} showDoubleView={!isMobile}
                 tileClassName={({ date }) => {
-                    const matchedDates = testData?.filter(data => dayjs(date).add(1, 'second').isBetween(data.start, data.end, 'second'))
+                    const matchedDates = testData?.filter(data => dayjs(date).add(1, 'second').isBetween(data.start, data.end, 'second') || dayjs(data.start).format('YYYY/MM/DD') === dayjs(date).format('YYYY/MM/DD') || dayjs(data.end).format('YYYY/MM/DD') === dayjs(date).format('YYYY/MM/DD'))
                     if (matchedDates?.length === 1) return 'blocked-tile1'
                     if (matchedDates?.length === 2) return 'blocked-tile2'
                     if (matchedDates?.length >= 3) return 'blocked-tile3'
@@ -169,7 +170,7 @@ function App() {
                         </span>
                     </div>
                     {todaysBookings.map((data, index) => {
-                        return <div style={{ display: 'flex', flexDirection: 'row', border: '1px solid gray', padding: '4px', borderRadius: '8px' }} key={index}>{dayjs(data.start).format('YYYY-MM-DD HH:mm')} - {dayjs(data.end).format('YYYY-MM-DD HH:mm')}</div >
+                        return <div style={{ display: 'flex', flexDirection: 'row', border: '1px solid gray', padding: '4px', borderRadius: '8px' }} key={index}>{dayjs(data.start).format('YYYY/MM/DD HH:mm')} - {dayjs(data.end).format('YYYY/MM/DD HH:mm')}</div >
                     })}
                 </div>}
                 <button className='Button' style={{ marginTop: '32px' }} onClick={() => setIsOpen(true)}>Välj tid</button>

@@ -25,14 +25,14 @@ function ContactForm({start,end,hours,price,isBlocked}) {
         toast.success(`Du har bokat ett släp i ${hours} timmar till ett pris om ${price} kr`)
         return <>
         <p>Nu är det bokat.</p> 
-        <p>Swisha Calle {price} kr, på nummer 070 - 231 3101</p>
+        <p>Swisha Strandridaren {price} kr, på nummer 123 284 81 17.</p>
         </>
     }
    
     
     return (
         <form className='Form' onSubmit={handleSend}>
-            <div>
+            <div style={{gridArea:'a'}}>
 
 <label  style={{margin:'8px 8px 8px 0px'}}  htmlFor="firstName">
           Förnamn
@@ -49,7 +49,7 @@ function ContactForm({start,end,hours,price,isBlocked}) {
           errors={state.errors}
           />
           </div>
-            <div>
+            <div style={{gridArea:'b'}}>
 
                 <label style={{margin:'8px 8px 8px 0px'}}  htmlFor="lastName">
           Efternamn
@@ -66,24 +66,8 @@ function ContactForm({start,end,hours,price,isBlocked}) {
           errors={state.errors}
           />
           </div>
-          <div>
-
-        <label style={{margin:'8px 8px 8px 0px'}} htmlFor="email">
-          Email
-        </label>
-        <input
-          id="email"
-          type="email" 
-          name="Email"
-          required
-          />
-        <ValidationError 
-          prefix="Email" 
-          field="email"
-          errors={state.errors}
-          />
-          </div>
-          <div>
+         
+          <div style={{gridArea:'c'}}>
 
          <label style={{margin:'8px 8px 8px 0px'}}  htmlFor="phone">
           Telefonnummer
