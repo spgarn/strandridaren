@@ -17,7 +17,7 @@ function ContactForm({start,end,hours,price,isBlocked}) {
            return handleSubmit(e)
         }
         if(body.status === 403) {
-          return toast.error(body.message)}
+          return toast.error('Tiden är redan bokad. Ladda om sidan för att se alla bokade tider.')}
   
     }
 
